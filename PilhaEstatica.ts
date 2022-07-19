@@ -1,14 +1,14 @@
 import Pilha from './PilhaInterface';
 
-export default class PilhaEstatica implements Pilha {
-  private dados: number[];
+export default class PilhaEstatica<T> implements Pilha<T> {
+  private dados: T[];
   private topo: number = -1;
 
   constructor(private readonly tamanho: number) {
     this.dados = new Array(tamanho);
   }
 
-  adicionar(valor: number): void {
+  adicionar(valor: T): void {
     if (this.isCheia()) {
       throw new Error('Pilha cheia.');
     }
@@ -17,13 +17,12 @@ export default class PilhaEstatica implements Pilha {
     this.dados[this.topo] = valor;
   }
 
-  remover(): number {
+  remover(): T {
     if (this.isVazia()) {
       throw new Error('Pilha vazia.');
     }
 
     const valor = this.dados[this.topo];
-    this.dados[this.topo] = 0;
     this.topo = this.topo - 1;
 
     return valor;
@@ -38,10 +37,6 @@ export default class PilhaEstatica implements Pilha {
   }
 
   limpar(): void {
-    for (let i = 0; i <= this.topo; i++) {
-      this.dados[i] = 0;
-    }
-
     this.topo = -1;
   }
 

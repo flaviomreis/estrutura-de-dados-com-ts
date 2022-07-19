@@ -1,8 +1,8 @@
 import PilhaEstatica from './PilhaEstatica';
 
-const pilhaEstatica = new PilhaEstatica(10);
+const pilhaEstatica = new PilhaEstatica<string>(10);
 for (let i = 0; i < 5; i++) {
-  pilhaEstatica.adicionar(i);
+  pilhaEstatica.adicionar(`Item-${i}`);
 }
 console.log('---Pilha Estática---');
 pilhaEstatica.imprimir();

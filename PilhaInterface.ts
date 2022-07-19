@@ -1,6 +1,6 @@
-export default interface Pilha {
-  adicionar(valor: number): void;
-  remover(): number;
+export default interface Pilha<T> {
+  adicionar(valor: T): void;
+  remover(): T;
   isCheia(): boolean;
   isVazia(): boolean;
   limpar(): void;
