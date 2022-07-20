@@ -1,4 +1,4 @@
-import Fila from './FilaInterface';
+import Fila from '../interfaces/FilaInterface';
 
 class No<T> {
   public dado: T | null = null;

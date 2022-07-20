@@ -1,4 +1,4 @@
-import Fila from './FilaInterface';
+import Fila from '../interfaces/FilaInterface';
 
 export default class FilaCircular<T> implements Fila<T> {
   private base = 0;

@@ -1,4 +1,4 @@
-import Pilha from './PilhaInterface';
+import Pilha from '../interfaces/PilhaInterface';
 
 class No<T> {
   public anterior: No<T> | null = null;

@@ -1,4 +1,4 @@
-import Pilha from './PilhaInterface';
+import Pilha from '../interfaces/PilhaInterface';
 
 export default class PilhaEstatica<T> implements Pilha<T> {
   private dados: T[];
