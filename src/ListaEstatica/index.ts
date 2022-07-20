@@ -8,6 +8,14 @@ for (let i = 0; i < 5; i++) {
 console.log('---Fila Encadeada---');
 listaEstatica.imprimir();
 
+listaEstatica.resetIterator();
+console.log('>>', listaEstatica.next());
+console.log('>>', listaEstatica.next());
+console.log('<', listaEstatica.removerAtual());
+listaEstatica.imprimir();
+console.log('>>', listaEstatica.next());
+console.log('>>', listaEstatica.next());
+
 listaEstatica.adicionarNoFim('Item-1');
 listaEstatica.adicionarNoFim('Item-2');
 listaEstatica.imprimir();

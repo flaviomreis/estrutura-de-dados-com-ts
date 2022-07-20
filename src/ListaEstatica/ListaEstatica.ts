@@ -3,10 +3,28 @@ import Lista from '../interfaces/ListaInterface';
 export default class ListaEstatica<T> implements Lista<T> {
   private dados: T[] | null[];
   private tamanho: number;
+  private atual: number;
 
   constructor(private readonly capacidade: number) {
     this.dados = new Array<T>(capacidade);
     this.tamanho = 0;
+    this.atual = -1;
+  }
+
+  hasNext(): boolean {
+    return this.atual + 1 < this.tamanho;
+  }
+
+  next(): T | null {
+    if (!this.hasNext()) {
+      throw new Error('Não existe um próximo elemento');
+    }
+    this.atual++;
+    return this.dados[this.atual];
+  }
+
+  resetIterator(): void {
+    this.atual = -1;
   }
 
   imprimir(): void {
@@ -59,6 +77,12 @@ export default class ListaEstatica<T> implements Lista<T> {
 
   removerDoFim(): T | null {
     return this.remover(this.tamanho - 1);
+  }
+
+  removerAtual(): T | null {
+    const dado = this.remover(this.atual);
+    this.atual--;
+    return dado;
   }
 
   remover(posicao: number): T | null {
