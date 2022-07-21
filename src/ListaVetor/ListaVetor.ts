@@ -1,6 +1,8 @@
 import Lista from '../interfaces/ListaInterface';
 
-export default class ListaVetor<T> implements Lista<T>, Iterable<T | null> {
+export default class ListaVetor<T>
+  implements Lista<T | null>, Iterable<T | null>
+{
   private dados: (T | null)[];
   private tamanho: number;
   private atual: number;
