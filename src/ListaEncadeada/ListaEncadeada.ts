@@ -102,15 +102,36 @@ export default class ListaEncadeada<T> implements Lista<T> {
   }
 
   limpar(): void {
-    throw new Error('Method not implemented.');
+    this.topo = null;
+    this.base = null;
+    this.tamanho = 0;
   }
 
   removerDoFim(): T | null {
-    throw new Error('Method not implemented.');
+    if (this.isVazia()) {
+      throw new Error('Lista vazia.');
+    }
+    return this.remover(this.tamanho - 1);
   }
 
   remover(posicao: number): T | null {
-    throw new Error('Method not implemented.');
+    this.verificarPosicao(posicao + 1);
+    const no = this.getNo(posicao);
+    const anterior = no.anterior;
+    const proximo = no.proximo;
+    if (proximo === null) {
+      this.topo = anterior;
+    } else {
+      proximo.anterior = anterior;
+    }
+    if (anterior === null) {
+      this.base = proximo;
+    } else {
+      anterior.proximo = proximo;
+    }
+    this.tamanho--;
+    const dado = no.dado;
+    return dado;
   }
 
   get(posicao: number): T | null {

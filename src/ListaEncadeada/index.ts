@@ -23,3 +23,32 @@ try {
   }
 }
 lista.imprimir();
+
+console.log('<', lista.remover(1));
+lista.imprimir();
+
+try {
+  lista.remover(5);
+} catch (error) {
+  if (error instanceof Error) {
+    console.log('!!!', error.message);
+  }
+}
+lista.imprimir();
+
+console.log('<', lista.removerDoFim());
+lista.imprimir();
+
+console.log('<', lista.removerDoFim());
+console.log('<', lista.removerDoFim());
+console.log('<', lista.removerDoFim());
+console.log('<', lista.removerDoFim());
+lista.imprimir();
+try {
+  lista.removerDoFim();
+} catch (error) {
+  if (error instanceof Error) {
+    console.log('!!!', error.message);
+  }
+}
+lista.imprimir();
