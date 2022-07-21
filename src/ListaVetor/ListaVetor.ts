@@ -1,12 +1,12 @@
 import Lista from '../interfaces/ListaInterface';
 
-export default class ListaEstatica<T> implements Lista<T>, Iterable<T | null> {
-  private dados: T[] | null[];
+export default class ListaVetor<T> implements Lista<T>, Iterable<T | null> {
+  private dados: (T | null)[];
   private tamanho: number;
   private atual: number;
 
-  constructor(private readonly capacidade: number) {
-    this.dados = new Array<T>(capacidade);
+  constructor(private capacidade: number) {
+    this.dados = new Array<T | null>(capacidade);
     this.tamanho = 0;
     this.atual = -1;
   }
@@ -30,7 +30,7 @@ export default class ListaEstatica<T> implements Lista<T>, Iterable<T | null> {
   }
 
   isCheia(): boolean {
-    return this.tamanho === this.capacidade;
+    return false;
   }
 
   getTamanho(): number {
@@ -42,8 +42,14 @@ export default class ListaEstatica<T> implements Lista<T>, Iterable<T | null> {
   }
 
   adicionar(posicao: number, valor: T | null): void {
-    if (this.isCheia()) {
-      throw new Error('Lista cheia.');
+    if (this.tamanho === this.capacidade) {
+      this.capacidade = Math.floor(this.capacidade * 1.5);
+      console.log(this.capacidade);
+      const novosDados: (T | null)[] = new Array<T | null>(this.capacidade);
+      for (let i = 0; i < this.tamanho; i++) {
+        novosDados[i] = this.dados[i];
+      }
+      this.dados = novosDados;
     }
 
     if (posicao < 0 || posicao > this.tamanho) {

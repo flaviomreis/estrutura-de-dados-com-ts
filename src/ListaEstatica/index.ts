@@ -5,7 +5,7 @@ for (let i = 0; i < 5; i++) {
   listaEstatica.adicionarNoFim(`Item-${i}`);
 }
 
-console.log('---Fila Encadeada---');
+console.log('---Lista Estática---');
 listaEstatica.imprimir();
 
 for (let item of listaEstatica) {
