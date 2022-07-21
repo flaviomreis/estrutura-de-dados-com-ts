@@ -37,27 +37,21 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
 
   *[Symbol.iterator](): Generator<T | null> {
     if (this.base !== null) {
-      let atual = this.base;
+      let atual: No<T> | null = this.base;
       this.posicaoIterador = 0;
-      while (true) {
+      while (atual !== null) {
         yield atual.dado;
-        if (atual.proximo === null) {
-          break;
-        }
         atual = atual.proximo;
         this.posicaoIterador++;
       }
     }
   }
 
-  imprimir(): void {
+  imprime(): void {
     if (this.base !== null) {
-      let atual = this.base;
-      while (true) {
+      let atual: No<T> | null = this.base;
+      while (atual !== null) {
         console.log(atual.dado);
-        if (atual.proximo === null) {
-          break;
-        }
         atual = atual.proximo;
       }
     }
@@ -76,7 +70,7 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
     return this.tamanho;
   }
 
-  adicionarNoFim(valor: T | null): void {
+  adicionaNoFim(valor: T | null): void {
     const novo = new No<T>;
     novo.dado = valor;
     if (this.topo === null) {
@@ -90,7 +84,7 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
   }
 
   private getNo(posicao: number): No<T> {
-    this.verificarPosicao(posicao + 1);
+    this.verificaPosicao(posicao + 1);
     if (this.topo === null || this.base === null) {
       throw new Error('Lista inválida.');
     }
@@ -113,10 +107,10 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
     return atual;
 }
 
-  adicionar(posicao: number, valor: T | null): void {
-    this.verificarPosicao(posicao);
+  adiciona(posicao: number, valor: T | null): void {
+    this.verificaPosicao(posicao);
     if (posicao === this.tamanho) {
-      this.adicionarNoFim(valor);
+      this.adicionaNoFim(valor);
       return;
     }
     const novo = new No<T>;
@@ -134,28 +128,28 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
     this.tamanho++;
   }
 
-  limpar(): void {
+  limpa(): void {
     this.topo = null;
     this.base = null;
     this.tamanho = 0;
   }
 
-  removerNaPosicaoDoIterador() {
+  removeNaPosicaoDoIterador() {
     if (this.isVazia()) {
       throw new Error('Lista vazia.');
     }
-    return this.remover(this.posicaoIterador--);
+    return this.remove(this.posicaoIterador--);
   }
 
-  removerDoFim(): T | null {
+  removeDoFim(): T | null {
     if (this.isVazia()) {
       throw new Error('Lista vazia.');
     }
-    return this.remover(this.tamanho - 1);
+    return this.remove(this.tamanho - 1);
   }
 
-  remover(posicao: number): T | null {
-    this.verificarPosicao(posicao + 1);
+  remove(posicao: number): T | null {
+    this.verificaPosicao(posicao + 1);
     const no = this.getNo(posicao);
     const anterior = no.anterior;
     const proximo = no.proximo;
@@ -218,9 +212,42 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
     }
   }
 
-  private verificarPosicao(posicao: number): void {
+  private verificaPosicao(posicao: number): void {
     if (posicao < 0 || posicao > this.tamanho) {
       throw new Error(`# ${posicao} é uma posição inválida.`);
+    }
+  }
+
+  private trocaDePosicao(posicao1: number, posicao2: number) {
+    const dadoTemporario = this.getNo(posicao1).dado;
+    this.getNo(posicao1).dado = this.getNo(posicao2).dado;
+    this.getNo(posicao2).dado = dadoTemporario;
+  }
+
+  selectionSort() {
+    if (this.base === null) {
+      throw new Error('Lista vazia.');
+    }
+    let primeiro: No<T> | null = this.base;
+
+    while (primeiro !== null && primeiro.proximo !== null) {
+      let proximo: No<T> | null = primeiro.proximo;
+      let menor: No<T> | null = primeiro;
+      let elemento: No<T> | null = menor.proximo;
+      while (elemento !== null) {
+        if (menor.dado !== null && elemento.dado !== null) {
+          if (menor.dado > elemento.dado) {
+            menor = elemento;
+          }
+          elemento = elemento.proximo;
+        }
+      }
+
+      let dadoTemporario = primeiro.dado;
+      primeiro.dado = menor.dado;
+      menor.dado = dadoTemporario;
+
+      primeiro = proximo;
     }
   }
 }

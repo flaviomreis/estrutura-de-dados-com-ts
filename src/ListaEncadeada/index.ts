@@ -2,71 +2,69 @@ import ListaEncadeada from './ListaEncadeada';
 
 const lista = new ListaEncadeada<string>();
 
-lista.adicionar(0, 'Item-0');
-lista.imprimir();
-lista.adicionar(1, 'Item-1');
-lista.imprimir();
-lista.adicionarNoFim('Item-2');
-lista.imprimir();
-lista.adicionar(0, 'Novo-Item-0');
-lista.imprimir();
-lista.adicionar(3, 'Item-3');
-lista.imprimir();
-lista.adicionar(5, 'Item-5');
-lista.imprimir();
+lista.adiciona(0, 'Item-0');
+lista.imprime();
+lista.adiciona(1, 'Item-1');
+lista.imprime();
+lista.adicionaNoFim('Item-2');
+lista.imprime();
+lista.adiciona(0, 'Novo-Item-0');
+lista.imprime();
+lista.adiciona(3, 'Item-3');
+lista.imprime();
+lista.adiciona(5, 'Item-5');
+lista.imprime();
 
 try {
-  lista.adicionar(7, 'Item-7');
+  lista.adiciona(7, 'Item-7');
 } catch (error) {
   if (error instanceof Error) {
     console.log('!!!', error.message);
   }
 }
-lista.imprimir();
+lista.imprime();
 
-console.log('<', lista.remover(1));
-lista.imprimir();
+console.log('<', lista.remove(1));
+lista.imprime();
 
 try {
-  lista.remover(5);
+  lista.remove(5);
 } catch (error) {
   if (error instanceof Error) {
     console.log('!!!', error.message);
   }
 }
-lista.imprimir();
+lista.imprime();
 
-console.log('<', lista.removerDoFim());
-lista.imprimir();
+console.log('<', lista.removeDoFim());
+lista.imprime();
 
-console.log('<', lista.removerDoFim());
-console.log('<', lista.removerDoFim());
-console.log('<', lista.removerDoFim());
-console.log('<', lista.removerDoFim());
-lista.imprimir();
+console.log('<', lista.removeDoFim());
+console.log('<', lista.removeDoFim());
+console.log('<', lista.removeDoFim());
+console.log('<', lista.removeDoFim());
+lista.imprime();
 try {
-  lista.removerDoFim();
+  lista.removeDoFim();
 } catch (error) {
   if (error instanceof Error) {
     console.log('!!!', error.message);
   }
 }
-lista.imprimir();
+lista.imprime();
 
-lista.limpar();
-for (let i = 0; i < 5; i++) {
-  lista.adicionarNoFim(`Item-${i}`);
+lista.limpa();
+for (let i = 0; i < 1500; i++) {
+  lista.adicionaNoFim(`Item-${i}`);
 }
-for (let i = 0; i < 5; i++) {
-  lista.adicionarNoFim(`Item-${i}`);
+for (let i = 0; i < 1500; i++) {
+  lista.adicionaNoFim(`Item-${i}`);
 }
-lista.imprimir();
 
 console.log('_', lista.indice('Item-1'));
 console.log('_', lista.indice('Item-10'));
 console.log('_', lista.ultimoIndice('Item-1'));
 console.log('_', lista.ultimoIndice('Item-10'));
 
-let listaComNulo = new ListaEncadeada<string>();
-listaComNulo.adicionarNoFim(null);
-listaComNulo.imprimir();
+lista.selectionSort();
+// lista.imprime();
