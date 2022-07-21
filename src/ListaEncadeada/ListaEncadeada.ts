@@ -6,7 +6,7 @@ class No<T> {
   public proximo: No<T> | null = null;
 }
 
-export default class ListaEncadeada<T> implements Lista<T> {
+export default class ListaEncadeada<T> implements Lista<T | null>, Iterable<T | null> {
   private base: No<T> | null;
   private topo: No<T> | null;
   private tamanho: number;
@@ -15,6 +15,34 @@ export default class ListaEncadeada<T> implements Lista<T> {
     this.tamanho = 0;
     this.base = null;
     this.topo = null;
+  }
+
+  // public makeIterable = () => [Symbol.iterator];
+
+  // [Symbol.iterator] = function*(): Generator<T | null> {
+    // if (this.base !== null) {
+    //   let atual = this.base;
+    //   while (true) {
+    //     yield atual.dado;
+    //     if (atual.proximo === null) {
+    //       break;
+    //     }
+    //     atual = atual.proximo;
+    //   }
+    // }
+  // };
+
+  *[Symbol.iterator](): Generator<T | null> {
+    if (this.base !== null) {
+      let atual = this.base;
+      while (true) {
+        yield atual.dado;
+        if (atual.proximo === null) {
+          break;
+        }
+        atual = atual.proximo;
+      }
+    }
   }
 
   imprimir(): void {
@@ -135,19 +163,47 @@ export default class ListaEncadeada<T> implements Lista<T> {
   }
 
   get(posicao: number): T | null {
-    throw new Error('Method not implemented.');
+    return this.getNo(posicao).dado;
   }
 
   set(posicao: number, valor: T | null): void {
-    throw new Error('Method not implemented.');
+    this.getNo(posicao).dado = valor;
   }
 
   indice(valor: T | null): number {
-    throw new Error('Method not implemented.');
+    if (this.base === null) {
+      return -1;
+    }
+    let atual = this.base;
+    let indice = 0;
+    while (true) {
+      if (atual.dado === valor) {
+        return indice;
+      }
+      indice++;
+      if (atual.proximo === null) {
+        return -1;
+      }
+      atual = atual.proximo;
+    }
   }
 
   ultimoIndice(valor: T | null): number {
-    throw new Error('Method not implemented.');
+    if (this.topo === null) {
+      return -1;
+    }
+    let atual = this.topo;
+    let indice = this.tamanho - 1;
+    while (true) {
+      if (atual.dado === valor) {
+        return indice;
+      }
+      indice--;
+      if (atual.anterior === null) {
+        return -1;
+      }
+      atual = atual.anterior;
+    }
   }
 
   private verificarPosicao(posicao: number): void {

@@ -52,3 +52,17 @@ try {
   }
 }
 lista.imprimir();
+
+lista.limpar();
+for (let i = 0; i < 5; i++) {
+  lista.adicionarNoFim(`Item-${i}`);
+}
+for (let i = 0; i < 5; i++) {
+  lista.adicionarNoFim(`Item-${i}`);
+}
+lista.imprimir();
+
+console.log('_', lista.indice('Item-1'));
+console.log('_', lista.indice('Item-10'));
+console.log('_', lista.ultimoIndice('Item-1'));
+console.log('_', lista.ultimoIndice('Item-10'));
