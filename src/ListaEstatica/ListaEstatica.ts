@@ -1,6 +1,6 @@
 import Lista from '../interfaces/ListaInterface';
 
-export default class ListaEstatica<T> implements Lista<T> {
+export default class ListaEstatica<T> implements Lista<T>, Iterable<T | null> {
   private dados: T[] | null[];
   private tamanho: number;
   private atual: number;
@@ -11,20 +11,10 @@ export default class ListaEstatica<T> implements Lista<T> {
     this.atual = -1;
   }
 
-  hasNext(): boolean {
-    return this.atual + 1 < this.tamanho;
-  }
-
-  next(): T | null {
-    if (!this.hasNext()) {
-      throw new Error('Não existe um próximo elemento');
+  *[Symbol.iterator]() {
+    while (this.atual < this.tamanho - 1) {
+      yield this.dados[++this.atual];
     }
-    this.atual++;
-    return this.dados[this.atual];
-  }
-
-  resetIterator(): void {
-    this.atual = -1;
   }
 
   imprimir(): void {
