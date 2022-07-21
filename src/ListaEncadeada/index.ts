@@ -66,3 +66,7 @@ console.log('_', lista.indice('Item-1'));
 console.log('_', lista.indice('Item-10'));
 console.log('_', lista.ultimoIndice('Item-1'));
 console.log('_', lista.ultimoIndice('Item-10'));
+
+let listaComNulo = new ListaEncadeada<string>();
+listaComNulo.adicionarNoFim(null);
+listaComNulo.imprimir();

@@ -6,15 +6,18 @@ class No<T> {
   public proximo: No<T> | null = null;
 }
 
-export default class ListaEncadeada<T> implements Lista<T | null>, Iterable<T | null> {
+// export default class ListaEncadeada<T> implements Lista<T | null>, Iterable<T | null> {
+export default class ListaEncadeada<T> implements Lista<T | null> {
   private base: No<T> | null;
   private topo: No<T> | null;
   private tamanho: number;
+  private posicaoIterador: number;
 
   constructor() {
     this.tamanho = 0;
     this.base = null;
     this.topo = null;
+    this.posicaoIterador = -1;
   }
 
   // public makeIterable = () => [Symbol.iterator];
@@ -35,12 +38,14 @@ export default class ListaEncadeada<T> implements Lista<T | null>, Iterable<T | 
   *[Symbol.iterator](): Generator<T | null> {
     if (this.base !== null) {
       let atual = this.base;
+      this.posicaoIterador = 0;
       while (true) {
         yield atual.dado;
         if (atual.proximo === null) {
           break;
         }
         atual = atual.proximo;
+        this.posicaoIterador++;
       }
     }
   }
@@ -133,6 +138,13 @@ export default class ListaEncadeada<T> implements Lista<T | null>, Iterable<T | 
     this.topo = null;
     this.base = null;
     this.tamanho = 0;
+  }
+
+  removerNaPosicaoDoIterador() {
+    if (this.isVazia()) {
+      throw new Error('Lista vazia.');
+    }
+    return this.remover(this.posicaoIterador--);
   }
 
   removerDoFim(): T | null {

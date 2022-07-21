@@ -1,10 +1,8 @@
-export default interface Fila<T> {
-  isVazia(): boolean;
-  isCheia(): boolean;
+import Colecao from './Colecao';
+
+export default interface Fila<T> extends Colecao<T> {
   getTamanho(): number;
-  adicionarNoFim(valor: T | null): void;
   adicionar(posicao: number, valor: T | null): void;
-  limpar(): void;
   removerDoFim(): T | null;
   remover(posicao: number): T | null;
   get(posicao: number): T | null;
