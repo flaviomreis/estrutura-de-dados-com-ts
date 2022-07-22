@@ -25,6 +25,13 @@ console.log(no2.proximo.dado);
 console.log('---');
 
 let temp: No<string> | null = no2;
+temp.dado = 'temp';
+
+console.log(no2.anterior.dado);
+console.log(no2.dado);
+console.log(no2.proximo.dado);
+console.log('---');
+
 no2 = no4;
 no2.anterior = temp.anterior;
 no2.proximo = temp.proximo;
