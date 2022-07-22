@@ -54,10 +54,7 @@ try {
 lista.imprime();
 
 lista.limpa();
-for (let i = 0; i < 1500; i++) {
-  lista.adicionaNoFim(`Item-${i}`);
-}
-for (let i = 0; i < 1500; i++) {
+for (let i = 0; i < 60000; i++) {
   lista.adicionaNoFim(`Item-${i}`);
 }
 

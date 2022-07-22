@@ -105,7 +105,7 @@ export default class ListaEncadeada<T> implements Lista<T | null> {
       }
     }
     return atual;
-}
+  }
 
   adiciona(posicao: number, valor: T | null): void {
     this.verificaPosicao(posicao);
